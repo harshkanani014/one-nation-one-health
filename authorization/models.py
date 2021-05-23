@@ -1,11 +1,11 @@
 # Create your models here.
 from enum import unique
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractUser, AbstractBaseUser
 from django.db import models
 
 class CustomUser(AbstractUser):
     name = models.TextField(max_length=100)
-    username = None
+    username = models.TextField(default="a")
     mobile = models.BigIntegerField(unique=True)
     is_patient = models.BooleanField(default=False)
     is_doctor = models.BooleanField(default=False)
@@ -14,8 +14,11 @@ class CustomUser(AbstractUser):
     counter = models.IntegerField(default=0, blank=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    REQUIRED_FIELDS = ['username']
     USERNAME_FIELD = 'mobile'
-    REQUIRED_FIELDS = []
+    
 
     def __str__(self):
         return str(self.Mobile)
+
+#class UserManager(A)

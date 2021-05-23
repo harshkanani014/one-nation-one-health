@@ -16,6 +16,8 @@ import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_USER_MODEL_USERNAME_FILED = None
 AUTH_USER_MODEL = 'authorization.CustomUser'
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
@@ -32,6 +34,9 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'django_extensions',
+    'patient',
+    'doctor',
     'authorization',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -78,7 +83,7 @@ WSGI_APPLICATION = 'one_health.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'e_health',
+        'NAME': 'e-health2',
         'USER': 'postgres',
         'PASSWORD': 'postgres',
         'HOST': 'localhost'
