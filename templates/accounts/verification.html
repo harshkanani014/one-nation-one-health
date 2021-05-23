@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+{% load static %}
+<head>
+<title>e-health</title>
+</head>
+
+<body>
+ <h1>OTP verification page</h1>
+ <form action="verify_otp" method="POST">
+ {% csrf_token %}
+ <input type="text" class="form-control" autofocus="" name ='otp' placeholder="Enter OTP" autocomplete="off" pattern="[0-9]{4}" required>
+ <input type="submit">
+ </form>
+</body>

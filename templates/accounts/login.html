@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+
+{% load static %}
+<head>
+<title>e-health</title>
+</head>
+
+<body>
+ <h1>Login Page</h1>
+  
+ <form action="login" method="POST">
+ {% csrf_token %}
+ <input name="phoneNumber" placeholder="Phone number" type="tel" required>
+ <input type="submit" value="submit">
+ {% if messages %}
+		{% for message in messages %}
+
+		  <div id="mesg" class="alert alert-{{message.tags}} alert-dismissible" visible ="false">
+			<strong>{{message}}</strong> 
+		  </div>
+
+		{% endfor %}
+    {% endif %} 
+ </form>
+</body>

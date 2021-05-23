@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+
+{% load static %}
+<head>
+<title>e-health</title>
+</head>
+
+<body>
+ <h1>Register Page</h1>
+  
+ <form action="register" method="POST">
+ {% csrf_token %}
+ <input name="name" placeholder="full name" type="text" required></br>
+ <input name="phoneNumber" placeholder="Phone number" type="tel" required></br>
+ <div class="form-group options">
+	<input type="checkbox" name="patient" value="patient" required>
+	<lable for="patient"> patient </lable><br>
+	<input type="checkbox" name="doctor" value="doctor" required>
+	<lable for="doctor">doctor </lable><br>
+	<input type="checkbox" name="pharmacist" value="pharmacist" required>
+	<lable for="pharmacist">pharmacist </lable><br>
+</div>
+ <input type="submit" value="submit">
+ {% if messages %}
+		{% for message in messages %}
+
+		  <div id="mesg" class="alert alert-{{message.tags}} alert-dismissible" visible ="false">
+			<strong>{{message}}</strong> 
+		  </div>
+
+		{% endfor %}
+    {% endif %} 
+ </form>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script>
+
+$('input[type="checkbox"]').on('change', function() {
+   $(this).siblings('input[type="checkbox"]').prop('checked', false);
+});
+
+$(function(){
+    var requiredCheckboxes = $('.options :checkbox[required]');
+    requiredCheckboxes.change(function(){
+        if(requiredCheckboxes.is(':checked')) {
+            requiredCheckboxes.removeAttr('required');
+        } else {
+            requiredCheckboxes.attr('required', 'required');
+        }
+    });
+});
+
+
+
+</script>
