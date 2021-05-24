@@ -9,6 +9,7 @@ import base64
 import random
 from django.contrib.auth.decorators import login_required
 from twilio.rest import Client
+from doctor.models import HealthRecord
 # Create your views here.
 
 def send_sms(otp, to_):
@@ -153,7 +154,22 @@ def patient_index(request):
 
 @login_required(login_url="/")
 def doctor_index(request):
-    return render(request, "doctor/doctor_index.html")
+    if request.method=="POST":
+        phone = request.POST.get("phoneNumber")
+        try:
+            find_phone = CustomUser.objects.get(mobile=phone)
+            request.session['mob'] = phone
+            print(request.session['mob'])
+            print(find_phone)
+            print(find_phone.id)
+            find_records = HealthRecord.objects.filter(user_details_id=find_phone.id)
+            #print(find_records)
+            return render(request, "doctor/doctor_index.html", { 'find_records': find_records })
+        except:
+            messages.warning(request, "Phone number does not exist")
+            return redirect("/doctor_index")
+    else:
+        return render(request, "doctor/doctor_index.html")
 
 @login_required(login_url="/")
 def pharmacist_index(request):
@@ -161,5 +177,6 @@ def pharmacist_index(request):
 
 def logout_view(request):
     logout(request)
+    request.session.flush()
     return redirect("/")
 

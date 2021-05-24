@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+
+{% load static %}
+<head>
+<title>e-health</title>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+</head>
+<body>
+    <h1>Create health record</h1>
+    <form action="/doctor/enter_patient_record" method="POST">
+    {% csrf_token %}
+    <input name="patient_name" placeholder="Patient name" type="text" required></br>
+    <input name="patient_gender"placeholder="Patient gender" type="text" required></br>
+    <input name="patient_age" placeholder="Patient Age" type="number" required></br>
+    <input name="doctor_fees" placeholder="Doctor fees" type="number" required></br>
+    <input name="payment_method" placeholder="payment method" type="text" required></br>
+    <input name="prescription" placeholder="prescription" type="text" required></br>
+    <input type="text" name="medicine" id="med" class="med" placeholder="medicine name" ></br> 
+    <input type="submit" value="Submit data">
+    </form>
+</body>
+
+<link href="https://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.min.css" rel="stylesheet"></link>
+<script src="https://code.jquery.com/ui/1.10.2/jquery-ui.min.js"></script>
+<script>
+
+var tags = {{ med|safe }};
+$('.med').autocomplete({
+    autoFocus: true,
+    source: tags
+})
+
+</script>

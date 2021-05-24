@@ -19,6 +19,6 @@ class CustomUser(AbstractUser):
     
 
     def __str__(self):
-        return str(self.Mobile)
+        return str(self.mobile)
 
 #class UserManager(A)
