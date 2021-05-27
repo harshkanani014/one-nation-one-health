@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
 from authorization.models import CustomUser
 from .models import HealthRecord, Medicine
@@ -14,6 +14,7 @@ def add_record(request):
         doctor_fees = request.POST.get('doctor_fees')
         payment_method =  request.POST.get('payment_method')
         prescription = request.POST.get('prescription')
+        medicine = request.POST.get('medicine')
         user_data = CustomUser.objects.get(mobile=user_num)
         new_health_record = HealthRecord()
         new_health_record.user_details = user_data
@@ -23,21 +24,22 @@ def add_record(request):
         new_health_record.doctor_fees = doctor_fees
         new_health_record.payment_method = payment_method
         new_health_record.prescription = prescription
+        #new_health_record.medicine = medicine
         new_health_record.save()
-        request.session.flush()
-        return render(request, "doctor/record_entry.html")
+        #request.session.flush()
+        return redirect("/doctor_index")
     else:
         # user_num = request.session['mob']
-        # print(user_num)
-        all_med = Medicine.objects.all()
-        med = []
-        for i in all_med:
-            med.append(i.medicine_name)
-        print(med)
-        context = {
-            'med':med
-        }
-        return render(request, "doctor/record_entry.html", context)
+        # print(user_num) 
+        # all_med = Medicine.objects.all()
+        # med = []
+        # for i in all_med:
+        #     med.append(i.medicine_name)
+        # print(med)
+        # context = {
+        #     'med':med
+        # }
+        return render(request, "doctor/record_entry.html")
         
         
 

@@ -27,6 +27,6 @@ class HealthRecord(models.Model):
     doctor_fees = models.IntegerField()
     payment_method = models.TextField(max_length=100, default="None")
     prescription = models.TextField(max_length=1000)
-    medicine = JSONField(default=dict())
+    medicine = models.TextField(max_length=1000, default="None")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

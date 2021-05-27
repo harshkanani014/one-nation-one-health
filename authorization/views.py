@@ -119,7 +119,6 @@ def verify_otp(request):
                     elif 'is_pharmacist' in user_data:
                         new_user.is_pharmacist = user_data['is_pharmacist']
                     new_user.save()
-                    request.session.flush()
                     login(request, new_user)
                     if new_user.is_patient:
                         return redirect("/patient_index")
@@ -130,7 +129,6 @@ def verify_otp(request):
                 except:
                     user_data = request.session['mob']
                     user = CustomUser.objects.get(mobile=user_data['mob'])
-                    request.session.flush()
                     login(request, user)
                     if user.is_patient:
                         return redirect("/patient_index")
@@ -150,7 +148,14 @@ def verify_otp(request):
 
 @login_required(login_url="/")
 def patient_index(request):
-    return render(request, "patient/patient_index.html")
+    user_data = request.session['mob']
+    phone = user_data['mob']
+    find_phone = CustomUser.objects.get(mobile=phone)
+    print(request.session['mob'])
+    print(find_phone)
+    print(find_phone.id)
+    find_records = HealthRecord.objects.filter(user_details_id=find_phone.id)
+    return render(request, "patient/patient_index.html", { 'find_records': find_records })
 
 @login_required(login_url="/")
 def doctor_index(request):
