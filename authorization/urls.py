@@ -10,5 +10,6 @@ urlpatterns = [
     path('login', views.signin, name="signin"),
     path('patient_index', views.patient_index, name="patient"),
     path('doctor_index', views.doctor_index, name="doctor"),
-    path('pharmacist_index', views.pharmacist_index, name="pharmacist")
+    path('pharmacist_index', views.pharmacist_index, name="pharmacist"),
+    path('verify_patient', views.verify_patient, name="verify_patient")
 ]

@@ -7,7 +7,8 @@ from .models import HealthRecord, Medicine
 def add_record(request):
     print(request.session['mob'])
     if request.method=="POST":
-        user_num = request.session['mob']
+        phone = request.session['mob']
+        user_num = phone['mob']
         patient_name = request.POST.get('patient_name')
         patient_gender = request.POST.get('patient_gender')
         patient_age = request.POST.get('patient_age') 

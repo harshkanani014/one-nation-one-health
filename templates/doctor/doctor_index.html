@@ -53,27 +53,29 @@
             <form action="/doctor_index" method="POST" role="form" class="contactForm">
                  {% csrf_token %}
               <div class="form-group">
-                <input type="phonenumber" maxlength="10" class="form-control br-radius-zero" name="phoneNumber" id="email" placeholder="Your Registered Phone Number" data-rule="email" data-msg="Please enter a Phone Number" />
+                <input type="phonenumber" maxlength="10" class="form-control br-radius-zero" name="phoneNumber" id="email" placeholder="Patient Phone Number" data-rule="email" data-msg="Please enter a Phone Number" />
                 <div class="validation"></div>
               </div>
 
               <div class="form-action">
                
                    
-                    <button type="submit" class="btn btn-form">SEARCH</button>
-                
+                    <input type="submit" name="action1" class="btn btn-form" value="Search Prescription"/>
+                    <input type="submit" name="action2" class="btn btn-form" value="Create Prescription"/>
+                    
+
               </div>
             </form>
           </div>
-          <div class="form-action">
+          {% comment %} <div class="form-action">
             <button id="createbtn"><a href="/doctor/enter_patient_record" style="text-decoration: none; color: #0cb8b6; text-shadow: black; font-weight: bold;">Create Prescription</a></button>
-          </div>
+          </div> {% endcomment %}
         </div>
         
       </div>
   </section>
 
-
+{% comment %} 
   <div class="table-wrapper">
     <table class="fl-table">
         <thead>
@@ -93,13 +95,13 @@
             <td>{{record.patient_gender}}</td>
             <td>{{record.prescription}}</td>
             {% comment %} <td>{{record.medicine}}</td> {% endcomment %}
-            <td>{{record.created_at}}</td>
+            {% comment %} <td>{{record.created_at}}</td>
         </tr>
         {% endfor %}
         
         <tbody>
     </table>
-</div>
+</div> {% endcomment %} 
 
 
 {% comment %} <head>

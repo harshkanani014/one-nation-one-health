@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+	<head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>OTP Verification</title>
+		<link rel="stylesheet" type="text/css" href="{% static 'css/otpstyle.css' %}">
+	</head>
+	<body>
+        <section>
+            <div class="container">
+                <div class="user signinBx">
+                    <div class="imgBx"><img src="{% static 'images/img.jpg' %}"></div>
+                    <div class="formBx">
+                        <form action="verify_patient" method="POST">
+                        {% csrf_token %}
+                            <h2>OTP Verification</h2>
+                            <input type="text" maxlength="4" name="otp" placeholder="One Time Password">
+                            <span class="error"><p style="color: red;"id="name_error">OTP expires in 60 seconds.</p></span>
+                            <input type="submit" name="" value="Submit">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+	</body>
+</html>
+
+
+
+
+
+
+
+{% comment %} <!DOCTYPE html>
+{% load static %}
+<head>
+<title>e-health</title>
+</head>
+
+<body>
+ <h1>OTP verification page</h1>
+ <form action="verify_otp" method="POST">
+ {% csrf_token %}
+ <input type="text" class="form-control" autofocus="" name ='otp' placeholder="Enter OTP" autocomplete="off" pattern="[0-9]{4}" required>
+ <input type="submit">
+ </form>
+</body> {% endcomment %}

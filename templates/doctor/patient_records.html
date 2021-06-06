@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Doctor Page</title>
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans|Raleway|Candal">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/font-awesome.min.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/pstyle.css' %}">
+</head>
+
+<body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
+    <div class="bg-color"></div>
+      <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+          <div class="col-md-12">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+				        <span class="icon-bar"></span>
+				        <span class="icon-bar"></span>
+				        <span class="icon-bar"></span>
+				      </button>
+              <a class="navbar-brand" href="#"><img src="" class="img-responsive" style="width: 140px; margin-top: -16px;"></a>
+            </div>
+            <div class="collapse navbar-collapse navbar-right" id="myNavbar">
+              <ul class="nav navbar-nav">
+                <li class=""><a href="#banner">{{user.name}}</a></li>
+                <li class=""><a href="logout">Logout</a></li>
+                <li class=""><a href="#about">About</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+  
+  <section id="contact" class="section-padding">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h2 class="ser-title">Doctor's Portal</h2>
+          <hr class="botm-line"> 
+          
+  <div class="table-wrapper">
+    <h3 class="cnt-ttl">Patient Records</h3>
+    <table class="fl-table">
+        <thead>
+        <tr>
+            <th>Doctor's Name</th> 
+            <th>Doctor fees</th>
+            <th>Age</th>
+            <th>Prescription</th>
+            <th>payment method
+            <th>Date</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for record in find_records%}
+        <tr>
+            <td>{{record.patient_name}}</td>
+            <td>{{record.doctor_fees}}</td>
+            <td>{{record.patient_age}}</td>
+            <td>{{record.prescription}}</td>
+            <td>{{record.payment_method}}</td>
+            {% comment %} <td>{{record.medicine}}</td>  {% endcomment %}
+            <td>{{record.created_at}}</td>
+        </tr>
+        {% endfor %}
+        <tbody>
+    </table>
+</div>
+</section>
+  <!--footer-->
+  <footer id="footer">
+    <div class="top-footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4 col-sm-4 marb20">
+            <div class="ftr-tle">
+              <h4 class="white no-padding">Creators : </h4>
+            </div>
+            <div class="info-sec">
+              <p>Jeet Bangoria</p>
+            </div>
+            <div class="info-sec">
+              <p>Harsh Kanani</p>
+            </div>
+            <div class="info-sec">
+              <p>Gaurav Goverdhan</p>
+            </div>
+          </div>
+          <div class="col-md-4 col-sm-4 marb20">
+            <div class="ftr-tle">
+              <h4 class="white no-padding">Quick Links</h4>
+            </div>
+            <div class="info-sec">
+              <ul class="quick-info">
+                <li><a href="doctor_index"><i class="fa fa-circle"></i>Home</a></li>
+                <li><a href="doctor/enter_patient_record"><i class="fa fa-circle"></i>Cretae prescription</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-md-4 col-sm-4 marb20">
+            {% comment %} <div class="ftr-tle">
+              <h4 class="white no-padding">Follow us</h4>
+            </div> {% endcomment %}
+            <div class="info-sec">
+              {% comment %} <ul class="social-icon">
+                <li class="bglight-blue"><i class="fa fa-facebook"></i></li>
+                <li class="bgred"><i class="fa fa-google-plus"></i></li>
+                <li class="bgdark-blue"><i class="fa fa-linkedin"></i></li>
+                <li class="bglight-blue"><i class="fa fa-twitter"></i></li>
+              </ul> {% endcomment %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-line">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 text-center">
+           Nationwide Synced Pharmaceutical Systems
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!--/ footer-->
+
+  <script src="{% static 'js/jquery.min.js' %}"></script>
+  <script src="{% static 'js/jquery.easing.min.js' %}"></script>
+  <script src="{% static 'js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'js/custom.js' %}"></script>
+  <script src="{% static 'contactform/contactform.js' %}"></script>
+
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% comment %} <!DOCTYPE html>
+
+{% load static %}
+<head>
+<title>e-health</title>
+</head>
+<body>
+{% block content %}
+ <h1>Authorized</h1>
+ <h1>{{user.name}}</h1>
+ <h1>{{user.mobile}}</h1>
+ <a href="logout">logout</a>
+ <form action="/patient_index" method="POST">
+ {% csrf_token %}
+</form>
+<h1>New health record</h1>
+{% for record in find_records %}
+<h1> patient phone : {{ record.patient_name }} </h1>
+{% endfor %} 
+{% endblock %}
+</body> {% endcomment %}

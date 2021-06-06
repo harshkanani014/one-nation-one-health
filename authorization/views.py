@@ -161,20 +161,60 @@ def patient_index(request):
 def doctor_index(request):
     if request.method=="POST":
         phone = request.POST.get("phoneNumber")
-        try:
-            find_phone = CustomUser.objects.get(mobile=phone)
-            request.session['mob'] = phone
-            print(request.session['mob']) 
-            print(find_phone)
-            print(find_phone.id)
-            find_records = HealthRecord.objects.filter(user_details_id=find_phone.id)
-            #print(find_records)
-            return render(request, "doctor/doctor_index.html", { 'find_records': find_records })
-        except:
-            messages.warning(request, "Phone number does not exist")
-            return redirect("/doctor_index")
+        action1 =  request.POST.get("action1")
+        action2 =  request.POST.get("action2")
+        if action1!=None:
+            try:
+                find_phone = CustomUser.objects.get(mobile=phone)
+                otp = random.randint(1000, 9999)
+                send_sms(otp, phone)
+                print("OTP :", otp)
+                request.session['mob'] = {'mob':phone}
+                request.session['otp'] = otp
+                expire_at = time.time() + 50
+                request.session['exp'] = expire_at
+                context = {
+                            'var_phone': phone
+                        }
+                return render(request, "doctor/patient_verify.html", context)
+            except:
+                messages.warning(request, "Phone number does not exist")
+                return redirect("/doctor_index")
+        else:
+            return redirect("doctor/enter_patient_record")
     else:
         return render(request, "doctor/doctor_index.html")
+
+@login_required(login_url="/")
+def verify_patient(request):
+    if request.method=="POST":
+        if request.session.get('mob', None):
+            if time.time()>request.session['exp']:
+                context = {
+                    'var_phone': request.session['mob']['mob']
+                }
+                messages.warning(request, 'OTP was expired!')
+                return render(request,"accounts/verification.html",context)
+            elif(request.session['otp'] == int(request.POST.get('otp'))):
+                    user_data = request.session['mob']
+                    phone = user_data['mob']
+                    print(phone)
+                    find_phone = CustomUser.objects.get(mobile=phone)
+                    print(request.session['mob'])
+                    print(find_phone)
+                    print(find_phone.id)
+                    find_records = HealthRecord.objects.filter(user_details_id=find_phone.id)
+                    return render(request, "doctor/patient_records.html", { 'find_records': find_records })
+                    
+            else:
+                messages.warning(request, 'OTP was wrong!')
+                return redirect("/otp_verify")
+        else:
+            response = redirect('/doctor_index')
+            return response
+    else:
+        response = redirect('/doctor_index')
+        return response
 
 @login_required(login_url="/")
 def pharmacist_index(request):
