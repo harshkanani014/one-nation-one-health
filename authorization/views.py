@@ -56,7 +56,7 @@ def register(request):
         except:
                 print(name, phone)
                 otp = random.randint(1000, 9999)
-                #send_sms(otp, phone)
+                send_sms(otp, phone)
                 print("OTP :", otp)
                 if is_patient:
                     request.session['mob'] = {'name': name, 'mob':phone, 'is_patient': is_patient}
@@ -80,7 +80,7 @@ def signin(request):
         try:
             find_phone = CustomUser.objects.get(mobile=phone)
             otp = random.randint(1000, 9999)
-            #send_sms(otp, phone)
+            send_sms(otp, phone)
             print("OTP :", otp)
             request.session['mob'] = {'mob':phone}
             request.session['otp'] = otp
@@ -164,7 +164,7 @@ def doctor_index(request):
         try:
             find_phone = CustomUser.objects.get(mobile=phone)
             request.session['mob'] = phone
-            print(request.session['mob'])
+            print(request.session['mob']) 
             print(find_phone)
             print(find_phone.id)
             find_records = HealthRecord.objects.filter(user_details_id=find_phone.id)

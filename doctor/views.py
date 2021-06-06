@@ -10,7 +10,7 @@ def add_record(request):
         user_num = request.session['mob']
         patient_name = request.POST.get('patient_name')
         patient_gender = request.POST.get('patient_gender')
-        patient_age = request.POST.get('patient_age')
+        patient_age = request.POST.get('patient_age') 
         doctor_fees = request.POST.get('doctor_fees')
         payment_method =  request.POST.get('payment_method')
         prescription = request.POST.get('prescription')

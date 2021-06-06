@@ -50,10 +50,11 @@
         <thead>
         <tr>
             <th>Doctor's Name</th> 
-            <th>Location</th>
+            <th>Doctor fees</th>
+            <th>Age</th>
             <th>Prescription</th>
-            <th>Fees</th>
-            <th>Payment Mode</th>
+            <th>payment method
+            <th>Date</th>
         </tr>
         </thead>
         <tbody>
@@ -61,9 +62,10 @@
         <tr>
             <td>{{record.patient_name}}</td>
             <td>{{record.doctor_fees}}</td>
-            <td>{{record.payment_method}}</td>
+            <td>{{record.patient_age}}</td>
             <td>{{record.prescription}}</td>
-            <td>{{record.medicine}}</td>
+            <td>{{record.payment_method}}</td>
+            {% comment %} <td>{{record.medicine}}</td>  {% endcomment %}
             <td>{{record.created_at}}</td>
         </tr>
         {% endfor %}
@@ -97,21 +99,21 @@
             <div class="info-sec">
               <ul class="quick-info">
                 <li><a href="index.html"><i class="fa fa-circle"></i>Home</a></li>
-                <li><a href="index1.html"><i class="fa fa-circle"></i>Login | SignUp</a></li>
+                {% comment %} <li><a href="index1.html"><i class="fa fa-circle"></i>Login | SignUp</a></li> {% endcomment %}
               </ul>
             </div>
           </div>
           <div class="col-md-4 col-sm-4 marb20">
-            <div class="ftr-tle">
+            {% comment %} <div class="ftr-tle">
               <h4 class="white no-padding">Follow us</h4>
-            </div>
+            </div> {% endcomment %}
             <div class="info-sec">
-              <ul class="social-icon">
+              {% comment %} <ul class="social-icon">
                 <li class="bglight-blue"><i class="fa fa-facebook"></i></li>
                 <li class="bgred"><i class="fa fa-google-plus"></i></li>
                 <li class="bgdark-blue"><i class="fa fa-linkedin"></i></li>
                 <li class="bglight-blue"><i class="fa fa-twitter"></i></li>
-              </ul>
+              </ul> {% endcomment %}
             </div>
           </div>
         </div>

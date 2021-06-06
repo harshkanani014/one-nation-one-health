@@ -82,17 +82,17 @@
             <th>Age</th>
             <th>Gender</th>
             <th>Prescription</th>
-            <th>Payment Mode</th>
+            <th>Date</th>
         </tr>
         </thead>
         <tbody>
          {% for record in find_records%}
         <tr>
             <td>{{record.patient_name}}</td>
-            <td>{{record.age}}</td>
-            <td>{{record.gender}}</td>
+            <td>{{record.patient_age}}</td>
+            <td>{{record.patient_gender}}</td>
             <td>{{record.prescription}}</td>
-            <td>{{record.medicine}}</td>
+            {% comment %} <td>{{record.medicine}}</td> {% endcomment %}
             <td>{{record.created_at}}</td>
         </tr>
         {% endfor %}
